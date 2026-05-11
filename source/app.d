@@ -6,20 +6,13 @@ import std.random;
 import std.typecons;
 import std.string;
 import std.conv;
-import dxorshift;
 
 // Trying a lambda to get the distance
 // we use auto to mark a lambda, unless we 
-auto get_distance_old = (int real_score, int middle_possible_score) => 
+auto get_distance = (int real_score, int middle_possible_score) => 
     (middle_possible_score > real_score) ? 
     middle_possible_score - real_score : 
     real_score - middle_possible_score;
-
-int get_distance() (int real_score, int middle_possible_score) {
-    return (middle_possible_score > real_score) ? 
-        middle_possible_score - real_score : 
-        real_score - middle_possible_score;
-}
 
 // multiply the piece by 100 first to prevent int rounding down first
 auto get_percentage_distance = (int piece, int whole) =>
@@ -29,9 +22,7 @@ auto get_percentage_distance = (int piece, int whole) =>
 auto all_rolls = (int sides, int rolls, ref Random rnd) {
     int score = 0;
     foreach (_; 1 .. rolls + 1) {
-		int newscore = uniform(1, sides + 1, rnd);
-        score += newscore;
-		writeln("new score: ", newscore);
+        score += uniform(1, sides + 1, rnd);
     }
 
     return score;
