@@ -1,0 +1,12 @@
+{
+	"description": "Rolls x-sided dice y-number of times, and displays how close to the middle option the result is.",
+	"dependencies": {
+		"dxorshift": "~>0.1.1"
+	},
+	"authors": [
+		"Matt Payne"
+	],
+	"copyright": "Copyright © 2026, Matt Payne",
+	"license": "MIT",
+	"name": "dice"
+}
