@@ -6,6 +6,7 @@ import std.random;
 import std.typecons;
 import std.string;
 import std.conv;
+import std.range : iota;
 
 // Trying a lambda to get the distance
 // we use auto to mark a lambda, unless we 
@@ -19,7 +20,8 @@ auto get_percentage_distance = (int piece, int whole) =>
     piece * 100 / whole;
 
 
-auto all_rolls = (int sides, int rolls, ref Random rnd) {
+// the old imperative way
+auto all_rolls_old = (int sides, int rolls, ref Random rnd) {
     int score = 0;
     foreach (_; 1 .. rolls + 1) {
         score += uniform(1, sides + 1, rnd);
@@ -27,6 +29,13 @@ auto all_rolls = (int sides, int rolls, ref Random rnd) {
 
     return score;
 };
+
+// very functional with iota
+// iota produces a range. You can run a map on it without producing an array.
+auto all_rolls = (int sides, int rolls, ref Random rnd) =>
+    iota(rolls)
+        .map!(_ => uniform(1, sides + 1, rnd))
+        .sum;
 
 void main() {
 
